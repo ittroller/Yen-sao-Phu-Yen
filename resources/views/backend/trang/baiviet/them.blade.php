@@ -14,7 +14,7 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="LoaiBaiViet">Chọn loại bài viết</label>
-                            <select name="loaibv_id" id="LoaiBaiViet" class="form-control">
+                            <select name="loaibv_id" required id="LoaiBaiViet" class="form-control">
                                 <option>Chọn loại bài viết</option>
                                 @foreach($loai as $item)
                                     <option value="{{$item['id']}}">{{$item['tenloai']}}</option>
@@ -35,7 +35,6 @@
                             <input type="file" id="exampleInputFile" name="anh">
                         </div>
                     </div>
-
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Thêm</button>

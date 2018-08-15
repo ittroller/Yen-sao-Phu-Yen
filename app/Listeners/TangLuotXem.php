@@ -2,11 +2,10 @@
 
 namespace App\Listeners;
 
-use App\Events\DemLuotXem;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TangLuotXem
+class Tangluotxem
 {
     /**
      * Create the event listener.
@@ -21,10 +20,10 @@ class TangLuotXem
     /**
      * Handle the event.
      *
-     * @param  DemLuotXem  $event
+     * @param  object  $event
      * @return void
      */
-    public function handle(DemLuotXem $event)
+    public function handle($event)
     {
         //
     }

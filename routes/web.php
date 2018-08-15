@@ -86,7 +86,7 @@ Route::group(['prefix'=>'backend','middleware'=>'auth' ],function(){
         Route::get('/danh-sach',['uses'=>'BaiVietController@index','as'=>'backend.baiviet.danhsach']);
         Route::get('/them',['uses'=>'BaiVietController@create','as'=>'backend.baiviet.them']);
         Route::post('/them',['uses'=>'BaiVietController@store','as'=>'backend.baiviet.luu']);
-        Route::get('/xem/{id}',['uses'=>'BaiVietController@show','as'=>'backend.baiviet.xem']);
+        Route::get('/xem/{id}',['uses'=>'BaiVietController@show','as'=>'backend.baiviet.xem'])->middleware('filterview');
         Route::get('/sua/{id}',['uses'=>'BaiVietController@edit','as'=>'backend.baiviet.sua'])->middleware('admin');
         Route::post('/sua/{id}',['uses'=>'BaiVietController@update','as'=>'backend.baiviet.capnhat'])->middleware('admin');
         Route::get('/xoa/{id}',['uses'=>'BaiVietController@destroy','as'=>'backend.baiviet.xoa'])->middleware('admin');

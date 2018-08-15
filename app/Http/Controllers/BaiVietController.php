@@ -10,6 +10,10 @@ use File, Hash;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Input;
 use App\Http\Requests\ThemBaiVietRequest;
+use App\Http\Requests\SuaBaiVietRequest;
+
+use App\Events\Xem;
+use Illuminate\Support\Facades\Event;
 
 class BaiVietController extends Controller
 {
@@ -58,10 +62,23 @@ class BaiVietController extends Controller
         if(empty($request->file('anh'))){
             $bv->anhdaidien = '';
         }else{
-            $tenanh = $request->file('anh')->getClientOriginalName();
+            $tenanh = $date.$request->file('anh')->getClientOriginalName();
             $request->file('anh')->move('upload/anhbaiviet/',$tenanh);
             $bv->anhdaidien = $tenanh;
         }
+
+        preg_match_all( '@src="([^"]+)"@' , $request->noidung, $match );
+
+        $src = array_pop($match);
+        for($i=0; $i<count($src); $i++){
+            echo $src[$i];
+        }
+
+
+
+        die();
+
+
         if($bv->save()){
             Session::flash('success','Thêm bài viết thành công');
             return redirect()->back();
@@ -80,7 +97,7 @@ class BaiVietController extends Controller
     public function show($id)
     {
         $bv = BaiViet::findOrFail($id)->toArray();
-        Event::fire('bv.show', $post);
+        Event::fire('bv.xem', BaiViet::findOrFail($id));
 		return view('backend.trang.baiviet.xemchitiet',compact('bv'));
     }
 
@@ -105,7 +122,7 @@ class BaiVietController extends Controller
      * @param  \App\BaiViet  $baiViet
      * @return \Illuminate\Http\Response
      */
-    public function update(ThemBaiVietRequest $request, $id)
+    public function update(SuaBaiVietRequest $request, $id)
     {
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         $date = getStringTime(getdate());
@@ -121,7 +138,7 @@ class BaiVietController extends Controller
         $anhcu = 'upload/anhbaiviet/'.$request->anhcu;
 
         if(!empty($request->file('anhmoi'))){
-            $tenfile = $request->anhmoi->getClientOriginalName();
+            $tenfile = $date.$request->anhmoi->getClientOriginalName();
             $bv->anhdaidien = changeTitle($tenfile);
             $request->anhmoi->move('upload/anhbaiviet/',changeTitle($tenfile));
             if(File::exists($anhcu)){

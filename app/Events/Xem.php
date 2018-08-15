@@ -10,7 +10,10 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class Tangluotxem
+use App\BaiViet;
+use Illuminate\Session\Store;
+
+class Xem
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,17 +22,20 @@ class Tangluotxem
      *
      * @return void
      */
+
     private $session;
-    public function __construct()
+
+    public function __construct(Store $session)
     {
-        // $bv->increment('luotxem');
         $this->session = $session;
     }
-    public function handle(BaiViet $bv){
-        if(!$this->isPostView($bv)){
-            $bv->increment('luotxem');
-            $this->storePost($bv);
-        }
+    public function handle(BaiViet $bv)
+    {
+        if (!$this->isPostViewed($bv))
+	    {
+	        $bv->increment('luotxem');
+	        $this->storePost($bv);
+	    }
     }
     private function isPostViewed($bv)
 	{

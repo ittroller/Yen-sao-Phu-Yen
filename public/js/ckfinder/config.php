@@ -92,7 +92,7 @@ $config['resourceTypes'][] = array(
 
 $config['resourceTypes'][] = array(
     'name'              => 'Images',
-    'directory'         => 'anhsanpham',
+    'directory'         => 'anhbaiviet/anhnoidungbaiviet/',
     'maxSize'           => 0,
     'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
     'deniedExtensions'  => '',

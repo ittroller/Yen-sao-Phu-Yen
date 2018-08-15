@@ -51,4 +51,5 @@
 <script src="{{ asset('js/ckfinder/ckfinder.js') }}"></script>
 <script type="text/javascript">
         var baseURL = '{!! url("/") !!}';
+        // alert(baseURL);
 </script>

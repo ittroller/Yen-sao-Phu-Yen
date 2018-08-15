@@ -6,6 +6,8 @@ use App\Events\Event;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
+use App\Events\Xem;
+
 class EventListener
 {
     /**
@@ -24,8 +26,8 @@ class EventListener
      * @param  Event  $event
      * @return void
      */
-    public function handle(Event $event)
+    public function handle(Xen $event)
     {
-        //
+        $event->bv->increment('luotxem');
     }
 }
